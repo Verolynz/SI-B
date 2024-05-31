@@ -1,0 +1,9 @@
+.container {
+    width: 30%;
+    margin-top: 9%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+button{
+    width: 48%;
+}
