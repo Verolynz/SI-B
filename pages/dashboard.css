@@ -1,0 +1,128 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --clr-primary: #7380ec;
+    --clr-danger: #ff7782;
+    --clr-success: #41f1b6;
+    --clr-white: #fff;
+    --clr-info-dark: #7d8da1;
+    --clr-info-light: #dce1eb;
+    --clr-dark: #363949;
+    --clr-warnig: #ff4edc;
+    --clr-light: rgba(132, 139, 200, 0.18);
+    --clr-primary-variant: #111e88;
+    --clr-dark-variant: #677483;
+    --clr-color-background: #f3f9de;
+  
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+  
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+    --box-shadow: 0 2rem 3rem var(--clr-light);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: 0;
+    list-style: none;
+    appearance: none;
+}
+body .container {
+        height: 100vh;
+        display: flex;
+        margin: 0;
+        font-family: "Poppins", sans-serif;;
+      }
+      
+      .container {
+        display: flex;
+        width: 100%;
+      }
+      
+      /* Mengatur sidebar */
+      aside {
+        width: 250px;
+        background-color: #343a40;
+        color: rgb(248, 246, 246);
+        display: flex;
+        flex-direction: column;
+      }
+      
+      aside .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+      }
+      
+      aside .logo h2 {
+        margin: 0;
+      }
+      
+      aside .danger {
+        color: red;
+      }
+      
+      aside .close {
+        cursor: pointer;
+      }
+      
+      aside .sidebar {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        border-bottom: 1px solid #444;
+      }
+      
+      aside .sidebar a {
+        text-decoration: none;
+        color: var(--clr-info-dark);
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-left: 2rem;
+        gap: 1rem;
+        height: 3.2rem;
+        transition: all .1s ease-in;
+      }
+      
+      aside .sidebar a span {
+        font-size: 1.6rem;
+        transition: all -1s ease-in;
+       }
+
+       aside .sidebar a.logout {
+        position: absolute;
+        bottom: 1rem;
+        width: calc(100% - 40px);
+      }
+
+    aside .sidebar a.active{
+        background: var(--clr-light);
+        color: var(--clr-primary);
+        margin-left: 0;
+        border-left: 5px solid var(--clr-primary)  }
+      
+      /* Mengatur main section */
+      main {
+        flex-grow: 1;
+        padding: 20px;
+        background-color: #f1f1f1;
+        overflow-y: auto;
+      }
+      
+      /* Mengatur right section */
+      .right {
+        width: 300px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-left: 1px solid #ddd;
+        overflow-y: auto;
+      }
