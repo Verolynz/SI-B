@@ -76,18 +76,18 @@ CREATE TABLE detail_transaksi (
 );
 
 
---Insert data ke tabel users
+-- Insert data ke tabel users
 INSERT INTO users (username, password, role) VALUES
-('admin', '$2y$10$f.d1h3423423423423423423423423423423', 'admin'),
-('kasir1', '$2y$10$f.d1h3423423423423423423423423423423', 'kasir'),
-('gudang1', '$2y$10$f.d1h3423423423423423423423423423423', 'gudang'),
-('mekanik1', '$2y$10$f.d1h3423423423423423423423423423423', 'kasir'),
-('mekanik2', '$2y$10$f.d1h3423423423423423423423423423423', 'kasir'),
-('supervisor', '$2y$10$f.d1h3423423423423423423423423423423', 'admin'),
-('kasir2', '$2y$10$f.d1h3423423423423423423423423423423', 'kasir'),
-('gudang2', '$2y$10$f.d1h3423423423423423423423423423423', 'gudang'),
-('mekanik3', '$2y$10$f.d1h3423423423423423423423423423423', 'kasir'),
-('kepala_mekanik', '$2y$10$f.d1h3423423423423423423423423423423', 'admin');
+('admin', 'admin', 'admin'),
+('kasir1', 'admin', 'kasir'),
+('gudang1', 'admin', 'gudang'),
+('mekanik1', 'admin', 'kasir'),
+('mekanik2', 'admin', 'kasir'),
+('supervisor', 'admin', 'admin'),
+('kasir2', 'admin', 'kasir'),
+('gudang2', 'admin', 'gudang'),
+('mekanik3', 'admin', 'kasir'),
+('kepala_mekanik', 'admin', 'admin');
 
 -- Insert data ke tabel spareparts
 INSERT INTO spareparts (nama, harga_beli, harga_jual, stok) VALUES
