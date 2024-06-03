@@ -13,5 +13,5 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-// cara penggunaan
-require_once 'config/database.php';
+// // cara penggunaan
+// require_once 'config/database.php';

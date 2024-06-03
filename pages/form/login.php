@@ -1,7 +1,11 @@
 <?php
-require_once '../config/database.php';
+session_start(); // Mulai session
 
+// Sertakan file functions.php
+require_once '../functions/functions.php'; 
 
+// Panggil fungsi login saat halaman dimuat
+login(); 
 ?>
 
 
