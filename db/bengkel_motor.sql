@@ -1,5 +1,5 @@
 -- Membuat database (jika belum ada)
-CREATE DATABASE IFNOT EXISTS bengkel_motor;
+CREATE DATABASE IF NOT EXISTS bengkel_motor;
 
 -- Menggunakan database
 USE bengkel_motor;
