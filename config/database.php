@@ -1,9 +1,9 @@
 <?php
 // Konfigurasi database
-$db_host = 'localhost'; // Ganti dengan host database Anda
-$db_user = 'root';      // Ganti dengan username database Anda
-$db_pass = '';          // Ganti dengan password database Anda
-$db_name = 'bengkel_motor'; // Ganti dengan nama database Anda
+$db_host = 'localhost'; 
+$db_user = 'root';      
+$db_pass = '';          
+$db_name = 'bengkel_motor'; 
 
 // Membuat koneksi
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
