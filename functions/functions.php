@@ -2,7 +2,8 @@
 session_start(); // Mulai session di awal file
 
 // Sertakan file koneksi database (database.php)
-require_once 'config/database.php'; // Sesuaikan path jika perlu
+require_once '../../config/database.php';
+
 
 // Fungsi validasi input (contoh sederhana)
 function validateInput($input) {
@@ -28,7 +29,13 @@ function login() {
             $_SESSION['id'] = $user['id'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['username'] = $user['username'];
-            return true;
+
+            // Redirect ke dashboard.php jika berhasil
+            header("Location: ../dashboard/dashboard.php");
+            exit(); // Hentikan eksekusi lebih lanjut
+        } else {
+            // Set error message
+            $_SESSION['login_error'] = "Username atau password salah.";
         }
     }
     return false; 
