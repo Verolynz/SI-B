@@ -76,7 +76,7 @@ CREATE TABLE detail_transaksi (
 );
 
 
--- Insert data ke tabel users
+-- Insert  ke tabel users
 INSERT INTO users (username, password, role) VALUES
 ('admin', 'admin', 'admin'),
 ('kasir1', 'admin', 'kasir'),
@@ -89,7 +89,7 @@ INSERT INTO users (username, password, role) VALUES
 ('mekanik3', 'admin', 'kasir'),
 ('kepala_mekanik', 'admin', 'admin');
 
--- Insert data ke tabel spareparts
+-- Insert  ke tabel spareparts
 INSERT INTO spareparts (nama, harga_beli, harga_jual, stok) VALUES
 ('Oli Mesin 1L', 45000, 55000, 50),
 ('Kampas Rem Depan', 80000, 100000, 30),
@@ -102,7 +102,7 @@ INSERT INTO spareparts (nama, harga_beli, harga_jual, stok) VALUES
 ('V-Belt', 70000, 90000, 18),
 ('Kabel Gas', 25000, 35000, 35);
 
--- Insert data ke tabel jasa
+-- Insert  ke tabel jasa
 INSERT INTO jasa (nama, harga) VALUES
 ('Ganti Oli', 20000),
 ('Ganti Kampas Rem', 35000),
@@ -115,7 +115,7 @@ INSERT INTO jasa (nama, harga) VALUES
 ('Perbaikan Kelistrikan', 75000),
 ('Cuci Motor', 15000);
 
--- Insert data ke tabel pelanggan
+-- Insert  ke tabel pelanggan
 INSERT INTO pelanggan (nama, alamat, no_telepon) VALUES
 ('Budi Santoso', 'Jl. Mawar No. 10', '081234567890'),
 ('Ani Rahmawati', 'Jl. Melati No. 15', '082123456789'),
@@ -128,7 +128,7 @@ INSERT INTO pelanggan (nama, alamat, no_telepon) VALUES
 ('Indra Kusuma', 'Jl. Cempaka No. 50', '089987654321'),
 ('Jaka Pratama', 'Jl. Flamboyan No. 55', '088765432109');
 
--- Insert data ke tabel kendaraan
+-- Insert  ke tabel kendaraan
 INSERT INTO kendaraan (id_pelanggan, no_polisi, jenis, merk) VALUES
 (1, 'L 1234 AB', 'Motor', 'Honda'),
 (2, 'N 5678 CD', 'Motor', 'Yamaha'),
@@ -141,7 +141,7 @@ INSERT INTO kendaraan (id_pelanggan, no_polisi, jenis, merk) VALUES
 (4, 'D 2233 QR', 'Mobil', 'Nissan'),
 (5, 'B 5566 ST', 'Motor', 'Yamaha');
 
--- Insert data ke tabel transaksi (dengan id_pelanggan dan id_kendaraan)
+-- Insert  ke tabel transaksi (dengan id_pelanggan dan id_kendaraan)
 INSERT INTO transaksi (tanggal, jenis, total, id_user, id_pelanggan, id_kendaraan) VALUES
 ('2024-05-20', 'penjualan', 350000, 2, 1, 1),
 ('2024-05-21', 'pembelian', 850000, 3, NULL, NULL),
@@ -154,7 +154,7 @@ INSERT INTO transaksi (tanggal, jenis, total, id_user, id_pelanggan, id_kendaraa
 ('2024-05-16', 'penjualan', 150000, 7, 3, 8),
 ('2024-05-15', 'pembelian', 380000, 8, NULL, NULL);
 
--- Insert data ke tabel detail_transaksi (tanpa jenis_item, dengan id_sparepart dan id_jasa)
+-- Insert  ke tabel detail_transaksi (tanpa jenis_item, dengan id_sparepart dan id_jasa)
 INSERT INTO detail_transaksi (id_transaksi, id_sparepart, id_jasa, jumlah, harga) VALUES
 (1, 1, 3, 2, 55000), -- Transaksi 1: 2 Oli Mesin + Servis Ringan
 (1, NULL, 1, 1, 20000), -- Transaksi 1: Ganti Oli
