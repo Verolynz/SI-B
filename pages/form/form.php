@@ -27,7 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
 	<title>Halaman Login</title>
 	<link rel="stylesheet" type="text/css" href="../../assets/css/login.css">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+	<script src="../../assets/js/login.js"></script>
 </head>
 <body>
 	<div class="main">  	
