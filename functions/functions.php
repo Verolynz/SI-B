@@ -4,6 +4,7 @@ session_start(); // Mulai session di awal file
 // Sertakan file koneksi database (database.php)
 require_once '../../config/database.php';
 
+#Security Functions
 
 // Fungsi validasi input (contoh sederhana)
 function validateInput($input) {
@@ -12,6 +13,11 @@ function validateInput($input) {
     $input = htmlspecialchars($input);
     return $input;
 }
+
+#Security Functions
+
+
+#Auth Functions
 
 // Fungsi login (menggunakan POST jika didukung)
 function login() {
@@ -104,6 +110,13 @@ function logout() {
     exit();
 }
 
+
+#Auth Functions
+
+
+#CRUD Functions
+
+
 // Fungsi untuk mendapatkan daftar sparepart (contoh)
 function getSpareparts() {
     global $conn;
@@ -156,3 +169,6 @@ function getDetailTransaksi($id_transaksi) {
     $query = "SELECT * FROM detail_transaksi WHERE id_transaksi = $id_transaksi";
     $result = mysqli_query($conn, $query);
     return mysqli_fetch_all($result, MYSQLI_ASSOC); }
+
+
+    #CRUD Functions
