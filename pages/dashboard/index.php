@@ -22,18 +22,6 @@
   <head>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -43,10 +31,6 @@
 <title>
   
 Sistem Informasi Bengkel
-  
-
-  
-
   
 </title>
 
@@ -219,12 +203,12 @@ Sistem Informasi Bengkel
         <i class="material-icons opacity-10">login</i>
       </div>
     
-    <span class="nav-link-text ms-1">Sign In</span>
+    <span class="nav-link-text ms-1">Log Out</span>
   </a>
 </li>
 
   
-<li class="nav-item">
+<!-- <li class="nav-item">
   <a class="nav-link text-white " href="./sign-up.html">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -233,7 +217,7 @@ Sistem Informasi Bengkel
     
     <span class="nav-link-text ms-1">Sign Up</span>
   </a>
-</li>
+</li> -->
 
 
 
@@ -259,7 +243,7 @@ Sistem Informasi Bengkel
 
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
   <div class="container-fluid py-1 px-3">
-    <nav aria-label="breadcrumb">
+    <!-- <nav aria-label="breadcrumb">
       
       <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
@@ -267,21 +251,21 @@ Sistem Informasi Bengkel
       </ol>
       <h6 class="font-weight-bolder mb-0">index</h6>
       
-    </nav>
+    </nav> -->
     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
       <div class="ms-md-auto pe-md-3 d-flex align-items-center">
           
-          <div class="input-group input-group-outline">
+          <!-- <div class="input-group input-group-outline">
             <label class="form-label">Type here...</label>
             <input type="text" class="form-control">
-          </div>
+          </div> -->
           
       </div>
       <ul class="navbar-nav  justify-content-end">
-        <li class="nav-item d-flex align-items-center">
+        <!-- <li class="nav-item d-flex align-items-center">
           <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-material-dashboard">Online Builder</a>
-        </li>
-        <li class="mt-2">
+        </li> -->
+        <!-- <li class="mt-2">
           <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
         </li>
         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -292,19 +276,19 @@ Sistem Informasi Bengkel
               <i class="sidenav-toggler-line"></i>
             </div>
           </a>
-        </li>
-        <li class="nav-item px-3 d-flex align-items-center">
+        </li> -->
+        <!-- <li class="nav-item px-3 d-flex align-items-center">
           <a href="javascript:;" class="nav-link text-body p-0">
             <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
           </a>
-        </li>
-        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+        </li> -->
+        <!-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
           <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-bell cursor-pointer"></i>
-          </a>
+          </a> -->
 
           <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-            <li class="mb-2">
+            <!-- <li class="mb-2">
               <a class="dropdown-item border-radius-md" href="javascript:;">
                 <div class="d-flex py-1">
                   <div class="my-auto">
@@ -321,8 +305,8 @@ Sistem Informasi Bengkel
                   </div>
                 </div>
               </a>
-            </li>
-            <li class="mb-2">
+            </li> -->
+            <!-- <li class="mb-2">
               <a class="dropdown-item border-radius-md" href="javascript:;">
                 <div class="d-flex py-1">
                   <div class="my-auto">
@@ -336,11 +320,11 @@ Sistem Informasi Bengkel
                       <i class="fa fa-clock me-1"></i>
                       1 day
                     </p>
-                  </div>
+                  </div> 
                 </div>
               </a>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
               <a class="dropdown-item border-radius-md" href="javascript:;">
                 <div class="d-flex py-1">
                   <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
@@ -357,17 +341,17 @@ Sistem Informasi Bengkel
                   </div>
                 </div>
               </a>
-            </li>
+            </li> -->
           </ul>
         </li>
-        <li class="nav-item d-flex align-items-center">
+        <!-- <li class="nav-item d-flex align-items-center">
           <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
             <i class="fa fa-user me-sm-1"></i>
             
             <span class="d-sm-inline d-none">Sign In</span>
             
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -970,21 +954,21 @@ Sistem Informasi Bengkel
 
 
 
-<!-- <script>
-  var win = navigator.platform.indexOf('Win') > -1;
+<!-- <script>-->
+  <!-- var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
     var options = {
       damping: '0.5'
     }
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
   }
-</script>
+</script> -->
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc --><script src="./assets/js/material-dashboard.min.js?v=3.1.0"></script> -->
+ 
   </body>
 
 </html>
