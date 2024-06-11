@@ -37,7 +37,7 @@ function login() {
             $_SESSION['username'] = $user['username'];
 
             // Redirect ke dashboard.php jika berhasil
-            header("Location: ../dashboard/dashboard.php");
+            header("Location: ../dashboard/index.php");
             exit(); // Hentikan eksekusi lebih lanjut
         } else {
             // Set error message
