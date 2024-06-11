@@ -440,7 +440,7 @@ Sistem Informasi Bengkel
             </div>
             <div class="card-body">
               <h6 class="mb-0 ">Pelanggan Harian</h6>
-              <p class="text-sm "><span class="font-weight-bolder">50</span></p>
+              <p class="text-sm "><span class="font-weight-bolder"><?php echo $pelanggan_harian; ?></span></p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <!-- <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -460,7 +460,7 @@ Sistem Informasi Bengkel
             </div>
             <div class="card-body">
               <h6 class="mb-0 "> Transaksi Harian </h6>
-              <p class="text-sm "> <span class="font-weight-bolder">50</span></p>
+              <p class="text-sm "> <span class="font-weight-bolder"><?php echo $transaksi_harian; ?></span></p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <!-- <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -480,7 +480,7 @@ Sistem Informasi Bengkel
             </div>
             <div class="card-body">
               <h6 class="mb-0 ">Kendaraan Harian</h6>
-              <p class="text-sm "><span class="font-weight-bolder">50</span></p>
+              <p class="text-sm "><span class="font-weight-bolder"><?php echo $kendaraan_harian; ?></span></p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <!-- <i class="material-icons text-sm my-auto me-1">schedule</i>
