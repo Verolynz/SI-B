@@ -358,7 +358,31 @@ function AddSpareparts() {
     }
     return false; // Return false if the form is not submitted
 }
+function AddJasa() {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $namaJasa = validateInput($_POST['namaJasa']);
+        $harga = validateInput($_POST['harga']);
 
+        $query = "INSERT INTO jasa (nama, harga) VALUES ('$namaJasa', '$harga')";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            // Redirect to the inventaris.php page after successful insertion
+            header("Location: ../pages/inventaris.php");
+            exit;
+            return true; // Return true if insertion is successful
+        } else {
+            // Handle the error (e.g., display an error message)
+            echo "Error adding sparepart.";
+            return false; // Return false if there's an error
+        }
+
+
+
+}
+return false;
+}
 function geteditSpareparts($id) {
     global $conn;
     checkRole(['admin', 'gudang']);
@@ -397,6 +421,50 @@ function EditSpareparts($id) {
     }
 
 }
+function geteditJasa($id) {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    $query = "SELECT * FROM jasa WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    
+
+
+}
+return mysqli_fetch_assoc($result); // Use mysqli_fetch_assoc
+}
+
+function editJasa($id) {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // $id = validateInput($_POST['id']);
+        $namaJasa = validateInput($_POST['namaJasa']);
+        $harga = validateInput($_POST['harga']);
+
+        $query = "UPDATE jasa SET nama = '$namaJasa', harga = '$harga' WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            // Redirect to the inventaris.php page after successful update
+            header("Location: ../pages/inventaris.php");
+            exit;
+            return true; // Return true if update is successful
+        } else {
+            // Handle the error (e.g., display an error message)
+            echo "Error updating sparepart.";
+            return false; // Return false if there's an error
+        }
+
+    }
+    
+    return false;
+
+
+}
+
 function deletespareparts($id) {
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']);
@@ -415,6 +483,26 @@ function deletespareparts($id) {
         return false; // Return false if there's an error
     }
     return $result;
+}
+
+function deletejasa($id) {
+
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query
+    = "DELETE FROM jasa WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        // Redirect to the inventaris.php page after successful deletion
+        header("Location: ../pages/inventaris.php");
+        exit;
+        return true; // Return true if deletion is successful
+    } else {
+        // Handle the error (e.g., display an error message)
+        echo "Error deleting sparepart.";
+        return false; // Return false if there's an error
+    }
 }
 
 

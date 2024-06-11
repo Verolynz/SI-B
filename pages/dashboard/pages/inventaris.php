@@ -3,7 +3,8 @@
 require_once '../../../functions/functions_lower.php';
 checkRole(['admin', 'gudang', 'kasir']); 
 $spareparts = getSpareparts();
-$jasa = getJasa();
+$jasabengkel = getJasa();
+
 
 
 
@@ -467,54 +468,53 @@ Sistem Informasi Bengkel
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jenis Jasa</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"></th>
+                     
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">biaya</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2"></th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2"></th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"></th>
+                      
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">aksi</th>
-                      <th></th>
+                      
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-asana.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
-                          </div>
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Ganti Oli</h6>
-                          </div>
-                        </div>
-                      </td>
-                      
-                      <td>
-                        <span class="text-xs font-weight-bold"></span>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$2,500</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0"></p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0"></p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <a href="../CRUD/editjasa.php" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Hapus
-                        </a>
-                      </td>
-                      
-                    </tr>
-                    
-                    </tr>
+                    <?php if (!empty($jasabengkel)): ?>
+                      <?php foreach ($jasabengkel as $jasa): ?>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2">
+                              <div>
+                                <img src="../assets/img/small-logos/logo-asana.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                              </div>
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm"><?php echo $jasa['nama']; ?></h6>
+                              </div>
+                            </div>
+                          </td>
+                          
+                         
+                          <td>
+                            <p class="text-sm font-weight-bold mb-0">Rp. <?php echo number_format($jasa['harga'], 0, ',', '.'); ?></p>
+                          </td>
+                          
+                          
+                          <td >
+                              <a href="../CRUD/editjasa.php?id=<?php echo $jasa['id']; ?>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                Edit
+                              </a>
+                              <br>
+                              <br>
+                              <a href="../CRUD/hapusjasa.php?id=<?php echo $jasa['id']; ?>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                Hapus
+                              </a>
+                          </td>
+                          
+                          
+                        </tr>
+                      <?php endforeach; ?>
+                    <?php else: ?>
+                      <tr>
+                        <td colspan="7" class="text-center">Tidak ada data jasa.</td>
+                      </tr>
+                    <?php endif; ?>
                   </tbody>
                 </table>
               </div>
