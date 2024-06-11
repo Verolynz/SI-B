@@ -92,13 +92,25 @@ function getCurrentUser() {
 // Fungsi untuk memeriksa apakah pengguna sudah login dan memiliki peran yang diizinkan
 function checkRole($allowedRoles) {
     if (!isLoggedIn()) {
-        header('Location: login.php'); // Redirect ke halaman login jika belum login
+        header('Location: ../../pages/form/form.php'); // Redirect ke halaman login jika belum login
         exit();
     }
 
     if (!in_array($_SESSION['role'], $allowedRoles)) {
         // Jika pengguna tidak memiliki akses, arahkan ke halaman lain (misalnya, 403.php)
-        header('Location: 403.php'); // Redirect ke halaman error jika tidak memiliki akses
+        header('Location: ../../pages/form/form.php'); // Redirect ke halaman error jika tidak memiliki akses
+        exit();
+    }
+}
+function checkRole_tempaltes($allowedRoles) {
+    if (!isLoggedIn()) {
+        header('Location: ../../../pages/form/form.php'); // Redirect ke halaman login jika belum login
+        exit();
+    }
+
+    if (!in_array($_SESSION['role'], $allowedRoles)) {
+        // Jika pengguna tidak memiliki akses, arahkan ke halaman lain (misalnya, 403.php)
+        header('Location: ../../../pages/form/form.php'); // Redirect ke halaman error jika tidak memiliki akses
         exit();
     }
 }
@@ -106,7 +118,13 @@ function checkRole($allowedRoles) {
 function logout() {
     session_unset();
     session_destroy();
-    header('Location: login.php'); // Arahkan ke halaman login setelah logout
+    header('Location: ../../pages/form/form.php'); // Arahkan ke halaman login setelah logout
+    exit();
+}
+function logout_templates() {
+    session_unset();
+    session_destroy();
+    header('Location: ../../../pages/form/form.php'); // Arahkan ke halaman login setelah logout
     exit();
 }
 
@@ -170,5 +188,13 @@ function getDetailTransaksi($id_transaksi) {
     $result = mysqli_query($conn, $query);
     return mysqli_fetch_all($result, MYSQLI_ASSOC); }
 
+function getJumlahTransaksi() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']); 
+    $query = "SELECT COUNT(total) AS jumlah_transaksi FROM transaksi";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['jumlah_transaksi'];
+    }
 
     #CRUD Functions

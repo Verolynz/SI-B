@@ -1,21 +1,14 @@
+<?php
+require_once '../../functions/functions.php';
+
+checkRole(['admin', 'gudang', 'kasir']); 
+
+$jumlah_transaksi = getJumlahTransaksi();
 
 
 
-<!--
-=========================================================
-* Material Dashboard 2 - v3.1.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -367,7 +360,7 @@ Sistem Informasi Bengkel
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Jumlah Transaksi</p>
-                <h4 class="mb-0">$53k</h4>
+                <h4 class="mb-0"><?php echo $jumlah_transaksi; ?></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
