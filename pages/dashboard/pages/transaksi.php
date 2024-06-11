@@ -1,6 +1,6 @@
 <?php
 require_once '../../../functions/functions_lower.php';
-
+checkRole(['admin', 'gudang', 'kasir']); 
 $transactions = getTransaksi();
 
 $transactionDetails = getDetailTransaksi();
