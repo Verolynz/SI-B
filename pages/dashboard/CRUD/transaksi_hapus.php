@@ -11,7 +11,7 @@ if (isset($id) && is_numeric($id)) {
 
     if ($result) {
         // Redirect to the transaksi.php page after successful deletion
-        header("Location: transaksi.php");
+        header("Location: ../pages/transaksi.php");
         exit;
     } else {
         // Handle the error (e.g., display an error message)

@@ -1,21 +1,14 @@
 
+<?php
+require_once '../../../functions/functions_lower.php';
+checkRole(['admin', 'gudang', 'kasir']); 
+$spareparts = getSpareparts();
+$jasa = getJasa();
 
 
-<!--
-=========================================================
-* Material Dashboard 2 - v3.1.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
 
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -392,48 +385,57 @@ Sistem Informasi Bengkel
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Harga Beli</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Jual</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stok</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                      
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>                      
                     </tr>
-                    </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold"></span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <a href="../CRUD/editsparepart.php" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Hapus
-                        </a>
-                      </td>
-</tbody>
+                  </thead>
+                    <tbody>
+                    <?php if (!empty($spareparts)): ?>
+                      <?php foreach ($spareparts as $sparepart): ?>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                              </div>
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm"><?php echo $sparepart['nama']; ?></h6>
+                                
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0"><?php echo $sparepart['harga_beli']; ?></p>
+                            
+                            
+                          </td>
+                          
+                          <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"><p class="text-xs font-weight-bold mb-0"><?php echo $sparepart['harga_jual']; ?></p> </span>
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                          <p class="text-xs font-weight-bold mb-0"><?php echo $sparepart['stok']; ?></p>
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                          <a href="../CRUD/editsparepart.php?id=<?php echo $sparepart['id']; ?>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                              Edit
+                            </a>
+                            <br>
+                            <br>
+                            <a href="../CRUD/hapusspareparts.php?id=<?php echo $sparepart['id']; ?>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                              Hapus
+                            </a>
+                          </td>
+                          
+                        </tr>
+                      <?php endforeach; ?>
+                    <?php else: ?>
+                      <tr>
+                        <td colspan="7" class="text-center">Tidak ada data sparepart.</td>
+                      </tr>
+                    <?php endif; ?>
+                  </tbody>
                       <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">

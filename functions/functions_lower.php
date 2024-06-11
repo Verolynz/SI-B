@@ -333,3 +333,92 @@ function deleteTransaksi($id) {
     $result = mysqli_query($conn, $query);
     return $result;
 }
+function AddSpareparts() {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $namaSparepart = validateInput($_POST['namaSparepart']);
+        $hargaBeli = validateInput($_POST['hargaBeli']);
+        $hargaJual = validateInput($_POST['hargaJual']);
+        $stok = validateInput($_POST['stok']);
+
+        $query = "INSERT INTO spareparts (nama, harga_beli, harga_jual, stok) VALUES ('$namaSparepart', '$hargaBeli', '$hargaJual', '$stok')";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            // Redirect to the inventaris.php page after successful insertion
+            header("Location: ../pages/inventaris.php");
+            exit;
+            return true; // Return true if insertion is successful
+        } else {
+            // Handle the error (e.g., display an error message)
+            echo "Error adding sparepart.";
+            return false; // Return false if there's an error
+        }
+    }
+    return false; // Return false if the form is not submitted
+}
+
+function geteditSpareparts($id) {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    $query = "SELECT * FROM spareparts WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    }
+    return mysqli_fetch_assoc($result); // Use mysqli_fetch_assoc
+}
+
+function EditSpareparts($id) {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // $id = validateInput($_POST['id']);
+        $namaSparepart = validateInput($_POST['namaSparepart']);
+        $hargaBeli = validateInput($_POST['hargaBeli']);
+        $hargaJual = validateInput($_POST['hargaJual']);
+        $stok = validateInput($_POST['stok']);
+
+        $query = "UPDATE spareparts SET nama = '$namaSparepart', harga_beli = '$hargaBeli', harga_jual = '$hargaJual', stok = '$stok' WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            // Redirect to the inventaris.php page after successful update
+            header("Location: ../pages/inventaris.php");
+            exit;
+            return true; // Return true if update is successful
+        } else {
+            // Handle the error (e.g., display an error message)
+            echo "Error updating sparepart.";
+            return false; // Return false if there's an error
+        }
+    }
+
+}
+function deletespareparts($id) {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query
+    = "DELETE FROM spareparts WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        // Redirect to the inventaris.php page after successful deletion
+        header("Location: ../pages/inventaris.php");
+        exit;
+        return true; // Return true if deletion is successful
+    } else {
+        // Handle the error (e.g., display an error message)
+        echo "Error deleting sparepart.";
+        return false; // Return false if there's an error
+    }
+    return $result;
+}
+
+
+
+
+
+

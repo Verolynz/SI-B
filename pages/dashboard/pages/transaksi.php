@@ -411,7 +411,7 @@ Sistem Informasi Bengkel
                             <span class="badge badge-sm bg-gradient-success">Rp. <?php echo number_format($transaction['total_harga'], 0, ',', '.'); ?></span>
                           </td>
                           <td class="align-middle text-center text-sm">
-                            <a href="transaksi_hapus.php?id=<?php echo $transaction['transaksi_id']; ?> " class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                            <a href="../CRUD/transaksi_hapus.php?id=<?php echo $transaction['transaksi_id']; ?> " class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                               Hapus
                             </a>
                           </td>

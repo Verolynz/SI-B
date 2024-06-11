@@ -1,3 +1,11 @@
+<?php
+require_once '../../../functions/functions_lower.php';
+checkRole(['admin', 'gudang']);
+AddSpareparts();
+
+
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,7 +42,7 @@
 <body>
     <div class="container">
         <h2>Tambah Sparepart</h2>
-        <form action="submit_sparepart.php" method="POST">
+        <form action="" method="POST">
             <div class="mb-3">
                 <label for="namaSparepart" class="form-label">Nama Sparepart</label>
                 <input type="text" class="form-control" id="namaSparepart" name="namaSparepart" required>
