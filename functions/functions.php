@@ -244,6 +244,31 @@ function getKendaraanHarian() {
     $row = mysqli_fetch_assoc($result);
     return $row['jumlah_kendaraan'];
     }
+function getTableTransaksiTerbaru() { 
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT pelanggan.nama, transaksi.jenis, kendaraan.no_polisi, transaksi.total FROM pelanggan JOIN transaksi ON pelanggan.id = transaksi.id_pelanggan JOIN kendaraan ON transaksi.id_kendaraan = kendaraan.id ORDER BY transaksi.id DESC LIMIT 5";
+    $result = mysqli_query($conn, $query);
+    
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    }
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+function getTablePelangganTerbaru() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT nama FROM pelanggan ORDER BY id DESC LIMIT 5";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    }
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+
 
 
 
