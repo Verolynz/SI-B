@@ -1,21 +1,10 @@
+<?php
+require_once '../../../functions/functions_lower.php';
 
+$transactions = getTransaksi();
 
-
-<!--
-=========================================================
-* Material Dashboard 2 - v3.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-
+$transactionDetails = getDetailTransaksi();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -394,39 +383,45 @@ Sistem Informasi Bengkel
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Rp.100.000</span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Hapus
-                        </a>
-                      </td>
-                    </tr>
-                      
-                    
+                    <?php if (!empty($transactions)): ?>
+                      <?php foreach ($transactions as $transaction): ?>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                
+                              </div>
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0  align-middle text-center text-sm"><?php echo $transaction['username_mekanik']; ?></h6>
+                                
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0"><?php echo $transaction['nama_pelanggan']; ?></p>
+                            
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success"><?php echo $transaction['jenis_kendaraan']; ?></span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"><?php echo $transaction['tanggal_transaksi']; ?></span>
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success">Rp. <?php echo number_format($transaction['total_harga'], 0, ',', '.'); ?></span>
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <a href="transaksi_hapus.php?id=<?php echo $transaction['transaksi_id']; ?> " class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                              Hapus
+                            </a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    <?php else: ?>
+                      <tr>
+                        <td colspan="7" class="text-center">Tidak ada data transaksi.</td>
+                      </tr>
+                    <?php endif; ?>
                   </tbody>
                 </table>
               </div>
@@ -447,43 +442,45 @@ Sistem Informasi Bengkel
                 <table class="table align-items-center justify-content-center mb-0">
                   <thead>
                     <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Pelanggan</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jenis Transaksi</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Sparepart</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">jasa</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">jumlah</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">harga</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jasa</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-asana.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
-                          </div>
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Asana</h6>
-                          </div>
-                        </div>
-                      </td>
-                      
-                      <td>
-                        <span class="text-xs font-weight-bold">working</span>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$2,500</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$2,500</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$2,500</p>
-                      </td>
-                      
-                    </tr>
-                    
-                    </tr>
+                    <?php if (!empty($transactionDetails)): ?>
+                      <?php foreach ($transactionDetails as $detail): ?>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2">
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm"><?php echo $detail['nama_pelanggan']; ?></h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <span class="mb-0 text-sm font-weight-bold align-middle text-center"><?php echo $detail['jenis_transaksi']; ?></span>
+                          </td>
+                          <td>
+                            <p class="mb-0 text-sm font-weight-bold align-middle text-center"><?php echo $detail['nama_sparepart']; ?></p>
+                          </td>
+                          <td>
+                            <p class="mb-0 text-sm font-weight-bold align-middle text-center"><?php echo $detail['nama_jasa']; ?></p>
+                          </td>
+                         
+                          <td>
+                            <p class="mb-0 text-sm font-weight-bold align-middle text-center">Rp. <?php echo number_format($detail['total_harga'], 0, ',', '.'); ?></p>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    <?php else: ?>
+                      <tr>
+                        <td colspan="7" class="text-center">Tidak ada data transaksi.</td>
+                      </tr>
+                    <?php endif; ?>
                   </tbody>
                 </table>
               </div>
