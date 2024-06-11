@@ -191,10 +191,67 @@ function getDetailTransaksi($id_transaksi) {
 function getJumlahTransaksi() {
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']); 
-    $query = "SELECT COUNT(total) AS jumlah_transaksi FROM transaksi";
+    $query = "SELECT COUNT(id) AS jumlah_transaksi FROM transaksi";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
     return $row['jumlah_transaksi'];
     }
+function getJumlahKaryawan() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT COUNT(id) AS jumlah_karyawan FROM users";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['jumlah_karyawan'];
+    }
+function getJumlahPelanggan() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT COUNT(id) AS jumlah_pelanggan FROM pelanggan";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['jumlah_pelanggan'];
+    }
+function getJumlahKendaraan() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT COUNT(id) AS jumlah_kendaraan FROM kendaraan";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['jumlah_kendaraan'];
+    }
+function getPelangganHarian() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT COUNT(pelanggan.id) AS jumlah_pelanggan FROM pelanggan JOIN transaksi ON pelanggan.id = transaksi.id_pelanggan WHERE tanggal = CURDATE()";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['jumlah_pelanggan'];
+    }
+function getTransaksiHarian() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT COUNT(id) AS jumlah_transaksi FROM transaksi WHERE tanggal = CURDATE()";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['jumlah_transaksi'];
+    }
+function getKendaraanHarian() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT COUNT(kendaraan.id) AS jumlah_kendaraan FROM kendaraan JOIN transaksi ON kendaraan.id = transaksi.id_kendaraan WHERE tanggal = CURDATE()";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['jumlah_kendaraan'];
+    }
+
+
+
+
+
+
+
+
+
 
     #CRUD Functions

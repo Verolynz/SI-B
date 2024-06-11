@@ -5,8 +5,17 @@ checkRole(['admin', 'gudang', 'kasir']);
 
 $jumlah_transaksi = getJumlahTransaksi();
 
+$jumlah_karyawan = getJumlahKaryawan();
 
+$jumlah_pelanggan = getJumlahPelanggan();
 
+$jumlah_kendaraan = getJumlahKendaraan();
+
+$pelanggan_harian = getPelangganHarian();
+
+$kendaraan_harian = getKendaraanHarian();
+
+$transaksi_harian = getTransaksiHarian();
 
 ?>
 
@@ -189,13 +198,11 @@ Sistem Informasi Bengkel
 
   
 <li class="nav-item">
-  <a class="nav-link text-white " href="../form/form.php">
-    
+  <a class="nav-link text-white " href="../form/logout_form.php">
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">login</i>
       </div>
-    
-    <span class="nav-link-text ms-1">Log Out</span>
+      <span class="nav-link-text ms-1">Log Out</span>
   </a>
 </li>
 
@@ -377,7 +384,7 @@ Sistem Informasi Bengkel
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Jumlah Karyawan</p>
-                <h4 class="mb-0">2,300</h4>
+                <h4 class="mb-0"><?php echo $jumlah_karyawan; ?></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -394,7 +401,7 @@ Sistem Informasi Bengkel
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Jumlah Pelanggan</p>
-                <h4 class="mb-0">3,462</h4>
+                <h4 class="mb-0"><?php echo $jumlah_pelanggan; ?></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -411,7 +418,7 @@ Sistem Informasi Bengkel
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Jumlah Kendaraan</p>
-                <h4 class="mb-0">$103,430</h4>
+                <h4 class="mb-0"><?php echo $jumlah_kendaraan; ?></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">

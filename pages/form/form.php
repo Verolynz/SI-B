@@ -2,6 +2,7 @@
 
 // Sertakan file functions.php
 require_once '../../functions/functions.php';
+
 // Tangani submit formulir login
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['login'])) {
