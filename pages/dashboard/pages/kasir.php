@@ -25,8 +25,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="./assets/img/favicon.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
 
 <title>
   
@@ -40,8 +40,8 @@ Sistem Informasi Bengkel
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 
 <!-- Nucleo Icons -->
-<link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
-<link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+<link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+<link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
 
 <!-- Font Awesome Icons -->
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
@@ -53,7 +53,7 @@ Sistem Informasi Bengkel
 
 
 
-<link id="pagestyle" href="./assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+<link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
 
 
 
@@ -78,7 +78,7 @@ Sistem Informasi Bengkel
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-      <img src="./assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+      <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
       <span class="ms-1 font-weight-bold text-white">Sistem Informasi Bengkel</span>
     </a>
   </div>
@@ -97,7 +97,7 @@ Sistem Informasi Bengkel
           
   
 <li class="nav-item">
-  <a class="nav-link text-white nav-link text-white active bg-gradient-primary" href="./index.php">
+  <a class="nav-link text-white nav-link text-white" href="../index.php">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">dashboard</i>
@@ -109,7 +109,7 @@ Sistem Informasi Bengkel
 
   
 <li class="nav-item">
-  <a class="nav-link text-white " href="./pages/transaksi.php">
+  <a class="nav-link text-white " href="./transaksi.php">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">table_view</i>
@@ -121,7 +121,7 @@ Sistem Informasi Bengkel
 
   
 <li class="nav-item">
-  <a class="nav-link text-white " href="./pages/inventaris.php">
+  <a class="nav-link text-white " href="./inventaris.php">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">receipt_long</i>
@@ -133,7 +133,7 @@ Sistem Informasi Bengkel
 
   
 <li class="nav-item">
-  <a class="nav-link text-white " href="./pages/kasir.php">
+  <a class="nav-link text-white active bg-gradient-primary " href="./kasir.php">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">view_in_ar</i>
@@ -145,7 +145,7 @@ Sistem Informasi Bengkel
 
   
 <li class="nav-item">
-  <a class="nav-link text-white " href="./pages/laporan.php">
+  <a class="nav-link text-white " href="./laporan.php">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
@@ -157,7 +157,7 @@ Sistem Informasi Bengkel
 
   
 <li class="nav-item">
-  <a class="nav-link text-white " href="./pages/Autentikasi.php">
+  <a class="nav-link text-white " href="./Autentikasi.php">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">notifications</i>
@@ -168,7 +168,7 @@ Sistem Informasi Bengkel
 </li>
 
 <li class="nav-item">
-  <a class="nav-link text-white " href="./pages/pencatatan.php">
+  <a class="nav-link text-white " href="./pencatatan.php">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">notifications</i>
@@ -196,7 +196,7 @@ Sistem Informasi Bengkel
 
   
 <li class="nav-item">
-  <a class="nav-link text-white " href="../form/form.php">
+  <a class="nav-link text-white " href="../../form/form.php">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">login</i>
