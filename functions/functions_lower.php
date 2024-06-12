@@ -505,6 +505,42 @@ function deletejasa($id) {
     }
 }
 
+// function createviewlaporanperbulan( ) {
+//     global $conn;
+//     checkRole(['admin', 'gudang', 'kasir']);
+//     $query = "CREATE OR REPLACE VIEW laporan_per_bulan AS SELECT MONTH(tanggal) AS bulan, YEAR(tanggal) AS tahun, SUM(total) AS total_pemasukan FROM transaksi WHERE jenis = 'penjualan' OR jenis = 'pembelian' GROUP BY bulan, tahun ORDER BY tahun, bulan";
+//     if (!$result) {
+//         echo "Error: " . mysqli_error($conn);
+//         return []; // Return an empty array if there's an error
+//     }
+//     return mysqli_fetch_assoc($result);
+// }
+function viewlaporanperbulan() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT * FROM laporan_pemasukan_perbulan";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    }
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+}
+function viewlaporanstok() {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query = "SELECT * FROM laporan_stok";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    }
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+}
+
 
 
 

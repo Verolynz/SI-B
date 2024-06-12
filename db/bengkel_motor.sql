@@ -165,3 +165,24 @@ INSERT INTO detail_transaksi (id_transaksi, id_sparepart, id_jasa, jumlah, harga
 (4, 1, 4, 3, 55000), -- Transaksi 4: 3 Oli Mesin + Servis Besar
 (5, 9, NULL, 2, 70000), -- Transaksi 5: 2 V-Belt
 (5, 7, NULL, 3, 30000); -- Transaksi 5: 3 Filter Udara
+
+
+-- view 1
+CREATE VIEW laporan_pemasukan_perbulan AS
+SELECT 
+    MONTH(tanggal) AS bulan,
+    YEAR(tanggal) AS tahun,
+    SUM(total) AS total_pemasukan
+FROM 
+    transaksi
+WHERE 
+    jenis = 'penjualan'
+GROUP BY 
+    bulan, tahun
+ORDER BY 
+    tahun, bulan;
+SELECT * FROM laporan_pemasukan_perbulan;
+
+-- view 2
+CREATE OR REPLACE VIEW laporan_stok AS
+SELECT nama, stok FROM spareparts;
