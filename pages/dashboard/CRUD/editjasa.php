@@ -1,3 +1,19 @@
+<?php
+
+require_once '../../../functions/functions_lower.php';
+
+checkRole(['admin', 'gudang']);
+$id = $_GET['id'];
+$geteditjasa = geteditJasa($id);
+
+
+
+
+editJasa($id);
+
+
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,14 +50,14 @@
 <body>
 <div class="container">
         <h2>Edit Jasa</h2>
-        <form action="submit_sparepart.php" method="POST">
+        <form action="" method="POST">
             <div class="mb-3">
                 <label for="namaSparepart" class="form-label">Jenis jasa</label>
-                <input type="text" class="form-control" id="namaSparepart" name="namaSparepart" required>
+                <input type="text" class="form-control" id="namaJasa" name="namaJasa" required value="<?php echo $geteditjasa['nama']; ?>">
             </div>
             <div class="mb-3">
                 <label for="hargaBeli" class="form-label">Biaya</label>
-                <input type="number" class="form-control" id="hargaBeli" name="hargaBeli" required>
+                <input type="number" class="form-control" id="harga" name="harga" required value="<?php echo $geteditjasa['harga']; ?>">
             </div>
             
             <button type="submit" class="btn btn-primary">Edit Jasa</button>

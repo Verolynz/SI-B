@@ -1,3 +1,8 @@
+<?php
+
+require_once '../../../functions/functions_lower.php';
+AddJasa();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,14 +39,14 @@
 <body>
     <div class="container">
         <h2>Tambah Jasa</h2>
-        <form action="submit_sparepart.php" method="POST">
+        <form action="" method="POST">
             <div class="mb-3">
-                <label for="namaSparepart" class="form-label">Jenis jasa</label>
-                <input type="text" class="form-control" id="namaSparepart" name="namaSparepart" required>
+                <label for="namaJasa" class="form-label">Jenis jasa</label>
+                <input type="text" class="form-control" id="namaJasa" name="namaJasa" required>
             </div>
             <div class="mb-3">
-                <label for="hargaBeli" class="form-label">Biaya</label>
-                <input type="number" class="form-control" id="hargaBeli" name="hargaBeli" required>
+                <label for="harga" class="form-label">Biaya</label>
+                <input type="number" class="form-control" id="harga" name="harga" required>
             </div>
             
             <button type="submit" class="btn btn-primary">Tambah Jasa</button>

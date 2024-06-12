@@ -2,7 +2,7 @@
 session_start(); // Mulai session di awal file
 
 // Sertakan file koneksi database (database.php)
-require_once '../../config/database.php';
+require_once '../../../config/database.php';
 
 #Security Functions
 
@@ -175,18 +175,62 @@ function getKendaraan() {
 function getTransaksi() {
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']); 
-    $query = "SELECT * FROM transaksi";
+    $query = "SELECT 
+                t.id AS transaksi_id, 
+                t.tanggal AS tanggal_transaksi,
+                t.total AS total_harga,
+                p.nama AS nama_pelanggan,
+                k.jenis AS jenis_kendaraan,
+                u.username AS username_mekanik
+                
+            FROM 
+                transaksi t
+            LEFT JOIN 
+                pelanggan p ON t.id_pelanggan = p.id
+            LEFT JOIN 
+                kendaraan k ON t.id_kendaraan = k.id
+            JOIN 
+                users u ON t.id_user = u.id
+            ORDER BY 
+                t.id DESC";
     $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    }
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
 // Fungsi untuk mendapatkan detail transaksi berdasarkan ID transaksi (contoh)
-function getDetailTransaksi($id_transaksi) {
+function getDetailTransaksi() {
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']); 
-    $query = "SELECT * FROM detail_transaksi WHERE id_transaksi = $id_transaksi";
+    $query = "SELECT 
+                p.nama AS nama_pelanggan, 
+                t.jenis AS jenis_transaksi, 
+                s.nama AS nama_sparepart, 
+                j.nama AS nama_jasa,
+                t.total AS total_harga
+            FROM 
+                detail_transaksi dt 
+            LEFT JOIN 
+                spareparts s ON dt.id_sparepart = s.id 
+            LEFT JOIN 
+                jasa j ON dt.id_jasa = j.id 
+            JOIN 
+                transaksi t ON dt.id_transaksi = t.id 
+            JOIN 
+                pelanggan p ON t.id_pelanggan = p.id
+            ORDER BY 
+                dt.id DESC";
     $result = mysqli_query($conn, $query);
-    return mysqli_fetch_all($result, MYSQLI_ASSOC); }
+    
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    }
+    return mysqli_fetch_all($result, MYSQLI_ASSOC); 
+}
 
 function getJumlahTransaksi() {
     global $conn;
@@ -280,4 +324,189 @@ function getTablePelangganTerbaru() {
 
 
     #CRUD Functions
+
+function deleteTransaksi($id) {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query
+    = "DELETE FROM transaksi WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+    return $result;
+}
+function AddSpareparts() {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $namaSparepart = validateInput($_POST['namaSparepart']);
+        $hargaBeli = validateInput($_POST['hargaBeli']);
+        $hargaJual = validateInput($_POST['hargaJual']);
+        $stok = validateInput($_POST['stok']);
+
+        $query = "INSERT INTO spareparts (nama, harga_beli, harga_jual, stok) VALUES ('$namaSparepart', '$hargaBeli', '$hargaJual', '$stok')";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            // Redirect to the inventaris.php page after successful insertion
+            header("Location: ../pages/inventaris.php");
+            exit;
+            return true; // Return true if insertion is successful
+        } else {
+            // Handle the error (e.g., display an error message)
+            echo "Error adding sparepart.";
+            return false; // Return false if there's an error
+        }
+    }
+    return false; // Return false if the form is not submitted
+}
+function AddJasa() {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $namaJasa = validateInput($_POST['namaJasa']);
+        $harga = validateInput($_POST['harga']);
+
+        $query = "INSERT INTO jasa (nama, harga) VALUES ('$namaJasa', '$harga')";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            // Redirect to the inventaris.php page after successful insertion
+            header("Location: ../pages/inventaris.php");
+            exit;
+            return true; // Return true if insertion is successful
+        } else {
+            // Handle the error (e.g., display an error message)
+            echo "Error adding sparepart.";
+            return false; // Return false if there's an error
+        }
+
+
+
+}
+return false;
+}
+function geteditSpareparts($id) {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    $query = "SELECT * FROM spareparts WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    }
+    return mysqli_fetch_assoc($result); // Use mysqli_fetch_assoc
+}
+
+function EditSpareparts($id) {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // $id = validateInput($_POST['id']);
+        $namaSparepart = validateInput($_POST['namaSparepart']);
+        $hargaBeli = validateInput($_POST['hargaBeli']);
+        $hargaJual = validateInput($_POST['hargaJual']);
+        $stok = validateInput($_POST['stok']);
+
+        $query = "UPDATE spareparts SET nama = '$namaSparepart', harga_beli = '$hargaBeli', harga_jual = '$hargaJual', stok = '$stok' WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            // Redirect to the inventaris.php page after successful update
+            header("Location: ../pages/inventaris.php");
+            exit;
+            return true; // Return true if update is successful
+        } else {
+            // Handle the error (e.g., display an error message)
+            echo "Error updating sparepart.";
+            return false; // Return false if there's an error
+        }
+    }
+
+}
+function geteditJasa($id) {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    $query = "SELECT * FROM jasa WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo "Error: " . mysqli_error($conn);
+        return []; // Return an empty array if there's an error
+    
+
+
+}
+return mysqli_fetch_assoc($result); // Use mysqli_fetch_assoc
+}
+
+function editJasa($id) {
+    global $conn;
+    checkRole(['admin', 'gudang']);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // $id = validateInput($_POST['id']);
+        $namaJasa = validateInput($_POST['namaJasa']);
+        $harga = validateInput($_POST['harga']);
+
+        $query = "UPDATE jasa SET nama = '$namaJasa', harga = '$harga' WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            // Redirect to the inventaris.php page after successful update
+            header("Location: ../pages/inventaris.php");
+            exit;
+            return true; // Return true if update is successful
+        } else {
+            // Handle the error (e.g., display an error message)
+            echo "Error updating sparepart.";
+            return false; // Return false if there's an error
+        }
+
+    }
+    
+    return false;
+
+
+}
+
+function deletespareparts($id) {
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query
+    = "DELETE FROM spareparts WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        // Redirect to the inventaris.php page after successful deletion
+        header("Location: ../pages/inventaris.php");
+        exit;
+        return true; // Return true if deletion is successful
+    } else {
+        // Handle the error (e.g., display an error message)
+        echo "Error deleting sparepart.";
+        return false; // Return false if there's an error
+    }
+    return $result;
+}
+
+function deletejasa($id) {
+
+    global $conn;
+    checkRole(['admin', 'gudang', 'kasir']);
+    $query
+    = "DELETE FROM jasa WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        // Redirect to the inventaris.php page after successful deletion
+        header("Location: ../pages/inventaris.php");
+        exit;
+        return true; // Return true if deletion is successful
+    } else {
+        // Handle the error (e.g., display an error message)
+        echo "Error deleting sparepart.";
+        return false; // Return false if there's an error
+    }
+}
+
+
+
+
+
 

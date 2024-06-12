@@ -5,8 +5,17 @@ checkRole(['admin', 'gudang', 'kasir']);
 
 $jumlah_transaksi = getJumlahTransaksi();
 
+$jumlah_karyawan = getJumlahKaryawan();
 
+$jumlah_pelanggan = getJumlahPelanggan();
 
+$jumlah_kendaraan = getJumlahKendaraan();
+
+$pelanggan_harian = getPelangganHarian();
+
+$kendaraan_harian = getKendaraanHarian();
+
+$transaksi_harian = getTransaksiHarian();
 
 ?>
 
@@ -189,13 +198,11 @@ Sistem Informasi Bengkel
 
   
 <li class="nav-item">
-  <a class="nav-link text-white " href="../form/form.php">
-    
+  <a class="nav-link text-white " href="../form/logout_form.php">
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">login</i>
       </div>
-    
-    <span class="nav-link-text ms-1">Log Out</span>
+      <span class="nav-link-text ms-1">Log Out</span>
   </a>
 </li>
 
@@ -377,7 +384,7 @@ Sistem Informasi Bengkel
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Jumlah Karyawan</p>
-                <h4 class="mb-0">2,300</h4>
+                <h4 class="mb-0"><?php echo $jumlah_karyawan; ?></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -394,7 +401,7 @@ Sistem Informasi Bengkel
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Jumlah Pelanggan</p>
-                <h4 class="mb-0">3,462</h4>
+                <h4 class="mb-0"><?php echo $jumlah_pelanggan; ?></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -411,7 +418,7 @@ Sistem Informasi Bengkel
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Jumlah Kendaraan</p>
-                <h4 class="mb-0">$103,430</h4>
+                <h4 class="mb-0"><?php echo $jumlah_kendaraan; ?></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -433,7 +440,7 @@ Sistem Informasi Bengkel
             </div>
             <div class="card-body">
               <h6 class="mb-0 ">Pelanggan Harian</h6>
-              <p class="text-sm "><span class="font-weight-bolder">50</span></p>
+              <p class="text-sm "><span class="font-weight-bolder"><?php echo $pelanggan_harian; ?></span></p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <!-- <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -453,7 +460,7 @@ Sistem Informasi Bengkel
             </div>
             <div class="card-body">
               <h6 class="mb-0 "> Transaksi Harian </h6>
-              <p class="text-sm "> <span class="font-weight-bolder">50</span></p>
+              <p class="text-sm "> <span class="font-weight-bolder"><?php echo $transaksi_harian; ?></span></p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <!-- <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -473,7 +480,7 @@ Sistem Informasi Bengkel
             </div>
             <div class="card-body">
               <h6 class="mb-0 ">Kendaraan Harian</h6>
-              <p class="text-sm "><span class="font-weight-bolder">50</span></p>
+              <p class="text-sm "><span class="font-weight-bolder"><?php echo $kendaraan_harian; ?></span></p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <!-- <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -516,206 +523,38 @@ Sistem Informasi Bengkel
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pelanggan</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jenis</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kendaraan</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nopol</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd"> -->
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Material XD Version</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <!-- <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="../assets/img/team-1.jpg" alt="team1">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                            <img src="../assets/img/team-2.jpg" alt="team2">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                            <img src="../assets/img/team-3.jpg" alt="team3">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="../assets/img/team-4.jpg" alt="team4">
-                          </a> -->
-                        </div>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <!-- <span class="text-xs font-weight-bold"> $14,000 </span> -->
-                      </td>
-                      <td class="align-middle">
-                        <!-- <div class="progress-wrapper w-75 mx-auto">
-                          <div class="progress-info">
-                            <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">60%</span>
+                    <?php
+                      $transactions = getTableTransaksiTerbaru();
+                      foreach ($transactions as $transaction) {
+                      ?>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm"><?php echo $transaction['nama']; ?></h6>
                             </div>
                           </div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div> -->
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm me-3" alt="atlassian"> -->
-                          </div>
+                        </td>
+                        <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Add Progress Track</h6>
+                            <h6 class="mb-0 text-sm"><?php echo $transaction['jenis']; ?></h6>
                           </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <!-- <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                            <img src="../assets/img/team-2.jpg" alt="team5">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="../assets/img/team-4.jpg" alt="team6">
-                          </a> -->
-                        </div>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <!-- <span class="text-xs font-weight-bold"> $3,000 </span> -->
-                      </td>
-                      <td class="align-middle">
-                        <!-- <div class="progress-wrapper w-75 mx-auto">
-                          <div class="progress-info">
-                            <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">10%</span>
-                            </div>
-                          </div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-info w-10" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div> -->
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm me-3" alt="team7"> -->
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <!-- <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                            <img src="../assets/img/team-3.jpg" alt="team8">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="../assets/img/team-1.jpg" alt="team9">
-                          </a> -->
-                        </div>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <!-- <span class="text-xs font-weight-bold"> Not set </span> -->
-                      </td>
-                      <td class="align-middle">
-                        <!-- <div class="progress-wrapper w-75 mx-auto">
-                          <div class="progress-info">
-                            <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">100%</span>
-                            </div>
-                          </div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-success w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div> -->
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm me-3" alt="spotify"> -->
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <!-- <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="../assets/img/team-4.jpg" alt="user1">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                            <img src="../assets/img/team-3.jpg" alt="user2">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                            <img src="../assets/img/team-4.jpg" alt="user3">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="../assets/img/team-1.jpg" alt="user4">
-                          </a> -->
-                        </div>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <!-- <span class="text-xs font-weight-bold"> $20,500 </span> -->
-                      </td>
-                      <td class="align-middle">
-                        <!-- <div class="progress-wrapper w-75 mx-auto">
-                          <div class="progress-info">
-                            <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">100%</span>
-                            </div>
-                          </div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-success w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div> -->
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="jira"> -->
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <!-- <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="../assets/img/team-4.jpg" alt="user5">
-                          </a> -->
-                        </div>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <!-- <span class="text-xs font-weight-bold"> $500 </span> -->
-                      </td>
-                      <td class="align-middle">
-                        <!-- <div class="progress-wrapper w-75 mx-auto">
-                          <div class="progress-info">
-                            <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">25%</span>
-                            </div>
-                          </div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-info w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="25"></div>
-                          </div>
-                        </div> -->
-                      </td>
-                    </tr>
-                    
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="text-xs font-weight-bold"><?php echo $transaction['no_polisi']; ?></span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="text-xs font-weight-bold"><?php echo $transaction['total']; ?></span>
+                        </td>
+                      </tr>
+                      <?php
+                      }
+                      ?>    
                   </tbody>
                 </table>
               </div>
@@ -736,66 +575,22 @@ Sistem Informasi Bengkel
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd"> -->
+                    <?php
+                      $customers = getTablePelangganTerbaru();
+                      foreach ($customers as $customer) {
+                      ?>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm"><?php echo $customer['nama']; ?></h6>
+                            </div>
                           </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Material XD Version</h6>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm me-3" alt="team7"> -->
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm me-3" alt="spotify"> -->
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="jira"> -->
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <!-- <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="jira"> -->
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Jawir</h6>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
+                        </td>
+                      </tr>
+                      <?php
+                      }
+                      ?>
                   </tbody>
                 </table>
               </div>
