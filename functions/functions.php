@@ -191,7 +191,7 @@ function getDetailTransaksi($id_transaksi) {
 function getJumlahTransaksi() {
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']); 
-    $query = "SELECT COUNT(id) AS jumlah_transaksi FROM transaksi";
+    $query = "SELECT * FROM jumlah_transaksi";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
     return $row['jumlah_transaksi'];
@@ -199,7 +199,7 @@ function getJumlahTransaksi() {
 function getJumlahKaryawan() {
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']);
-    $query = "SELECT COUNT(id) AS jumlah_karyawan FROM users";
+    $query = "SELECT * FROM jumlah_karyawan";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
     return $row['jumlah_karyawan'];
@@ -207,7 +207,7 @@ function getJumlahKaryawan() {
 function getJumlahPelanggan() {
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']);
-    $query = "SELECT COUNT(id) AS jumlah_pelanggan FROM pelanggan";
+    $query = "SELECT * FROM jumlah_pelanggan";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
     return $row['jumlah_pelanggan'];

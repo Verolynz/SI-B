@@ -186,3 +186,26 @@ SELECT * FROM laporan_pemasukan_perbulan;
 -- view 2
 CREATE OR REPLACE VIEW laporan_stok AS
 SELECT nama, stok FROM spareparts;
+
+-- view 3
+CREATE OR REPLACE VIEW jumlah_transaksi AS
+SELECT COUNT(id) AS jumlah_transaksi FROM transaksi;
+
+-- view 4
+CREATE OR REPLACE VIEW jumlah_karyawan AS 
+SELECT COUNT(id) AS jumlah_karyawan FROM users;
+
+-- view 5
+CREATE OR REPLACE VIEW jumlah_pelanggan AS
+SELECT COUNT(id) AS jumlah_pelanggan FROM pelanggan;
+
+-- Stored Procedure 1
+
+
+-- Stored Procedure 2
+
+-- Stored Procedure 3
+
+-- Stored Procedure 4
+
+-- Stored Procedure 5
