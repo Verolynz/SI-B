@@ -329,7 +329,7 @@ function deleteTransaksi($id) {
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']);
     $query
-    = "DELETE FROM transaksi WHERE id = $id";
+    = "CALL hapus_transaksi($id);";
     $result = mysqli_query($conn, $query);
     return $result;
 }
@@ -398,28 +398,40 @@ function geteditSpareparts($id) {
 function EditSpareparts($id) {
     global $conn;
     checkRole(['admin', 'gudang']);
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // $id = validateInput($_POST['id']);
         $namaSparepart = validateInput($_POST['namaSparepart']);
         $hargaBeli = validateInput($_POST['hargaBeli']);
         $hargaJual = validateInput($_POST['hargaJual']);
         $stok = validateInput($_POST['stok']);
 
-        $query = "UPDATE spareparts SET nama = '$namaSparepart', harga_beli = '$hargaBeli', harga_jual = '$hargaJual', stok = '$stok' WHERE id = $id";
-        $result = mysqli_query($conn, $query);
+        // Prepare the SQL statement (stored procedure call)
+        $stmt = mysqli_prepare($conn, "CALL edit_sparepart(?, ?, ?, ?, ?)");
+        
+        // Bind the parameters to the statement
+        mysqli_stmt_bind_param($stmt, "isiii", $id, $namaSparepart, $hargaBeli, $hargaJual, $stok);
+       
+        // Execute the prepared statement (stored procedure)
+        $result = mysqli_stmt_execute($stmt);
+        // You don't need mysqli_multi_query when using prepared statements
+       
 
-        if ($result) {
-            // Redirect to the inventaris.php page after successful update
-            header("Location: ../pages/inventaris.php");
-            exit;
-            return true; // Return true if update is successful
-        } else {
-            // Handle the error (e.g., display an error message)
-            echo "Error updating sparepart.";
-            return false; // Return false if there's an error
+        // Error handling untuk stored procedure
+        if (!$result) {
+            // Handle error stored procedure
+            echo "Error updating sparepart: " . mysqli_error($conn);
+            return false;
         }
-    }
 
+        // Tutup prepared statement
+        mysqli_stmt_close($stmt);
+
+        // Redirect ke inventaris.php
+        header("Location: ../pages/inventaris.php", true, 302); 
+        exit; 
+    } 
+
+    return false; // Tidak ada data POST, return false atau tampilkan formulir edit
 }
 function geteditJasa($id) {
     global $conn;
@@ -444,8 +456,9 @@ function editJasa($id) {
         $namaJasa = validateInput($_POST['namaJasa']);
         $harga = validateInput($_POST['harga']);
 
-        $query = "UPDATE jasa SET nama = '$namaJasa', harga = '$harga' WHERE id = $id";
-        $result = mysqli_query($conn, $query);
+        $stmt = mysqli_prepare($conn, "CALL edit_jasa(?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, "isi", $id, $namaJasa, $harga);
+        $result = mysqli_stmt_execute($stmt);
 
         if ($result) {
             // Redirect to the inventaris.php page after successful update
@@ -454,10 +467,10 @@ function editJasa($id) {
             return true; // Return true if update is successful
         } else {
             // Handle the error (e.g., display an error message)
-            echo "Error updating sparepart.";
+            echo "Error updating sparepart." . mysqli_error($conn);
             return false; // Return false if there's an error
         }
-
+        mysqli_stmt_close($stmt);
     }
     
     return false;
@@ -468,18 +481,18 @@ function editJasa($id) {
 function deletespareparts($id) {
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']);
-    $query
-    = "DELETE FROM spareparts WHERE id = $id";
-    $result = mysqli_query($conn, $query);
-
+    $stmt = mysqli_prepare($conn, "CALL hapus_sparepart(?)");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    $result = mysqli_stmt_execute($stmt);
     if ($result) {
         // Redirect to the inventaris.php page after successful deletion
         header("Location: ../pages/inventaris.php");
         exit;
         return true; // Return true if deletion is successful
+        mysqli_stmt_close($stmt);
     } else {
         // Handle the error (e.g., display an error message)
-        echo "Error deleting sparepart.";
+        echo "Error deleting sparepart." . mysqli_error($conn);
         return false; // Return false if there's an error
     }
     return $result;
@@ -489,10 +502,9 @@ function deletejasa($id) {
 
     global $conn;
     checkRole(['admin', 'gudang', 'kasir']);
-    $query
-    = "DELETE FROM jasa WHERE id = $id";
-    $result = mysqli_query($conn, $query);
-
+    $stmt = mysqli_prepare($conn, "CALL hapus_jasa(?)");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    $result = mysqli_stmt_execute($stmt);
     if ($result) {
         // Redirect to the inventaris.php page after successful deletion
         header("Location: ../pages/inventaris.php");
@@ -500,9 +512,10 @@ function deletejasa($id) {
         return true; // Return true if deletion is successful
     } else {
         // Handle the error (e.g., display an error message)
-        echo "Error deleting sparepart.";
+        echo "Error deleting sparepart. "  . mysqli_error($conn);
         return false; // Return false if there's an error
     }
+    mysqli_stmt_close($stmt);
 }
 
 // function createviewlaporanperbulan( ) {

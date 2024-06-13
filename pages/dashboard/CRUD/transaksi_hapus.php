@@ -15,7 +15,7 @@ if (isset($id) && is_numeric($id)) {
         exit;
     } else {
         // Handle the error (e.g., display an error message)
-        echo "Error deleting transaction.";
+        echo "Error deleting transaction. " . mysqli_error($conn);
     }
 } else {
     // Handle invalid ID (e.g., display an error message)

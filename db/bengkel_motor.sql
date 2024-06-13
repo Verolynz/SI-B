@@ -166,6 +166,33 @@ INSERT INTO detail_transaksi (id_transaksi, id_sparepart, id_jasa, jumlah, harga
 (5, 9, NULL, 2, 70000), -- Transaksi 5: 2 V-Belt
 (5, 7, NULL, 3, 30000); -- Transaksi 5: 3 Filter Udara
 
+ALTER TABLE users
+ADD COLUMN terakhir_login DATETIME,
+ADD COLUMN log_register DATETIME DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE users
+ADD COLUMN session_id VARCHAR(255);
+
+CREATE TABLE log_hapus_transaksi (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_transaksi_asal INT NOT NULL,
+    tanggal_transaksi DATE NOT NULL,
+    jenis_transaksi ENUM('pembelian', 'penjualan') NOT NULL,
+    total_transaksi DECIMAL(10,2) NOT NULL,
+    waktu_penghapusan TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE log_hapus_detail_transaksi (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_detail_transaksi_asal INT NOT NULL,
+    id_transaksi INT NOT NULL,
+    id_sparepart INT,
+    id_jasa INT,
+    jumlah INT NOT NULL,
+    harga DECIMAL(10,2) NOT NULL,
+    waktu_penghapusan TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 
 -- view 1
 CREATE VIEW laporan_pemasukan_perbulan AS
@@ -199,13 +226,156 @@ SELECT COUNT(id) AS jumlah_karyawan FROM users;
 CREATE OR REPLACE VIEW jumlah_pelanggan AS
 SELECT COUNT(id) AS jumlah_pelanggan FROM pelanggan;
 
+
+
 -- Stored Procedure 1
+DELIMITER //
+CREATE PROCEDURE hapus_transaksi(IN p_id INT)
+BEGIN
+    -- Deklarasi variabel untuk looping
+    DECLARE selesai INT DEFAULT FALSE;
+    DECLARE id_detail_transaksi INT;
+
+    -- Cursor untuk mengambil ID detail transaksi yang terkait
+    DECLARE cur_detail CURSOR FOR SELECT id FROM detail_transaksi WHERE id_transaksi = p_id;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET selesai = TRUE;
+
+    -- Mulai looping untuk menghapus detail transaksi terkait
+    OPEN cur_detail;
+
+    hapus_detail_loop: LOOP
+        FETCH cur_detail INTO id_detail_transaksi;
+        IF selesai THEN LEAVE hapus_detail_loop; END IF;
+
+        DELETE FROM detail_transaksi WHERE id = id_detail_transaksi;
+    END LOOP;
+
+    CLOSE cur_detail;
+
+    -- Hapus transaksi utama
+    DELETE FROM transaksi WHERE id = p_id;
+END //
+DELIMITER ;
 
 
 -- Stored Procedure 2
+DELIMITER //
+CREATE PROCEDURE edit_sparepart(
+    IN p_id INT, 
+    IN p_nama VARCHAR(100), 
+    IN p_harga_beli DECIMAL(10,2), 
+    IN p_harga_jual DECIMAL(10,2), 
+    IN p_stok INT
+)
+BEGIN
+    UPDATE spareparts 
+    SET 
+        nama = p_nama,
+        harga_beli = p_harga_beli,
+        harga_jual = p_harga_jual,
+        stok = p_stok
+    WHERE id = p_id;
+END //
+DELIMITER ;
 
 -- Stored Procedure 3
+DELIMITER //
+CREATE PROCEDURE hapus_sparepart(IN p_id INT)
+BEGIN
+    DELETE FROM spareparts WHERE id = p_id;
+END //
+DELIMITER ;
 
 -- Stored Procedure 4
+DELIMITER //
+CREATE PROCEDURE edit_jasa(IN p_id INT, IN p_nama VARCHAR(100), IN p_harga DECIMAL(10,2))
+BEGIN
+    UPDATE jasa
+    SET 
+        nama = p_nama,
+        harga = p_harga
+    WHERE id = p_id;
+END //
+DELIMITER ;
 
 -- Stored Procedure 5
+DELIMITER //
+CREATE PROCEDURE hapus_jasa(IN p_id INT)
+BEGIN
+    DELETE FROM jasa WHERE id = p_id;
+END //
+DELIMITER ;
+
+
+-- Trigger 1
+DELIMITER //
+CREATE OR REPLACE TRIGGER update_terakhir_login_before
+BEFORE UPDATE ON users
+FOR EACH ROW
+BEGIN
+    -- Periksa apakah session_id berubah dari NULL ke ada nilai atau dari ada nilai ke nilai baru
+    IF (OLD.session_id IS NULL AND NEW.session_id IS NOT NULL) OR 
+       (OLD.session_id IS NOT NULL AND NEW.session_id IS NOT NULL AND NEW.session_id <> OLD.session_id) THEN
+        SET NEW.terakhir_login = NOW(); 
+    END IF;
+END;
+//
+DELIMITER ;
+
+-- Trigger 2
+
+
+DELIMITER //
+CREATE TRIGGER after_delete_transaksi
+AFTER DELETE ON transaksi
+FOR EACH ROW
+BEGIN
+   
+    INSERT INTO log_hapus_transaksi (
+        id_transaksi_asal,
+        tanggal_transaksi,
+        jenis_transaksi,
+        total_transaksi
+    )
+    VALUES (
+        OLD.id,
+        OLD.tanggal,
+        OLD.jenis,
+        OLD.total
+     
+    );
+END;
+//
+DELIMITER ;
+
+
+
+
+-- Trigger 3
+DELIMITER //
+CREATE TRIGGER after_delete_detail_transaksi
+AFTER DELETE ON detail_transaksi
+FOR EACH ROW
+BEGIN
+    -- Insert data detail transaksi yang dihapus ke tabel log
+    INSERT INTO log_hapus_detail_transaksi (
+        id_detail_transaksi_asal,
+        id_transaksi,
+        id_sparepart,
+        id_jasa,
+        jumlah,
+        harga
+    )
+    VALUES (
+        OLD.id,
+        OLD.id_transaksi,
+        OLD.id_sparepart,
+        OLD.id_jasa,
+        OLD.jumlah,
+        OLD.harga  
+    );
+END;
+//
+DELIMITER ;
+
+

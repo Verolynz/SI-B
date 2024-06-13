@@ -25,27 +25,36 @@ function login() {
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = validateInput($_POST['username']);
-        $password = validateInput($_POST['password']); // Tidak ada enkripsi
+        $password = validateInput($_POST['password']); 
 
         $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) == 1) {
             $user = mysqli_fetch_assoc($result);
+
+            // Generate session ID (gunakan fungsi sesuai kebutuhan, misalnya session_create_id() atau random string)
+            $sessionId = session_create_id(); // Contoh menggunakan session_create_id()
+
+            // Update tabel users dengan session ID baru
+            $updateQuery = "UPDATE users SET session_id = '$sessionId' WHERE id = {$user['id']}";
+            mysqli_query($conn, $updateQuery);
+
+            // Set session variables
             $_SESSION['id'] = $user['id'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['session_id'] = $sessionId; // Simpan juga session ID di session variable
 
-            // Redirect ke dashboard.php jika berhasil
             header("Location: ../dashboard/index.php");
-            exit(); // Hentikan eksekusi lebih lanjut
+            exit(); 
         } else {
-            // Set error message
             $_SESSION['login_error'] = "Username atau password salah.";
         }
     }
     return false; 
 }
+
 
 // Fungsi registrasi (menggunakan POST jika didukung)
 function register() {
@@ -280,4 +289,41 @@ function getTablePelangganTerbaru() {
 
 
     #CRUD Functions
-
+    function EditSpareparts($id) {
+        global $conn;
+        checkRole(['admin', 'gudang']);
+    
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $namaSparepart = validateInput($_POST['namaSparepart']);
+            $hargaBeli = validateInput($_POST['hargaBeli']);
+            $hargaJual = validateInput($_POST['hargaJual']);
+            $stok = validateInput($_POST['stok']);
+    
+            // Prepare the SQL statement (stored procedure call)
+            $stmt = mysqli_prepare($conn, "CALL edit_sparepart(?, ?, ?, ?, ?)");
+            
+            // Bind the parameters to the statement
+            mysqli_stmt_bind_param($stmt, "isiii", $id, $namaSparepart, $hargaBeli, $hargaJual, $stok);
+           
+            // Execute the prepared statement (stored procedure)
+            $result = mysqli_stmt_execute($stmt);
+            // You don't need mysqli_multi_query when using prepared statements
+           
+    
+            // Error handling untuk stored procedure
+            if (!$result) {
+                // Handle error stored procedure
+                echo "Error updating sparepart: " . mysqli_error($conn);
+                return false;
+            }
+    
+            // Tutup prepared statement
+            mysqli_stmt_close($stmt);
+    
+            // Redirect ke inventaris.php
+            header("Location: ../pages/inventaris.php", true, 302); 
+            exit; 
+        } 
+    
+        return false; // Tidak ada data POST, return false atau tampilkan formulir edit
+    }
