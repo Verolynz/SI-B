@@ -379,3 +379,4 @@ END;
 DELIMITER ;
 
 
+-- Query dari PHP
