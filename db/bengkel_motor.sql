@@ -400,3 +400,45 @@ CREATE TABLE log_register_ip (
     ip_register VARCHAR(45) NOT NULL,  -- Menyimpan IPv4 atau IPv6
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+
+CREATE VIEW viewtransaksi AS
+SELECT 
+                t.id AS transaksi_id, 
+                t.tanggal AS tanggal_transaksi,
+                t.total AS total_harga,
+                p.nama AS nama_pelanggan,
+                k.jenis AS jenis_kendaraan,
+                u.username AS username_mekanik
+                
+            FROM 
+                transaksi t
+            LEFT JOIN 
+                pelanggan p ON t.id_pelanggan = p.id
+            LEFT JOIN 
+                kendaraan k ON t.id_kendaraan = k.id
+            JOIN 
+                users u ON t.id_user = u.id
+            ORDER BY 
+                t.id DESC;
+
+
+CREATE VIEW viewdetail_transaksi AS
+SELECT 
+                p.nama AS nama_pelanggan, 
+                t.jenis AS jenis_transaksi, 
+                s.nama AS nama_sparepart, 
+                j.nama AS nama_jasa,
+                t.total AS total_harga
+            FROM 
+                detail_transaksi dt 
+            LEFT JOIN 
+                spareparts s ON dt.id_sparepart = s.id 
+            LEFT JOIN 
+                jasa j ON dt.id_jasa = j.id 
+            JOIN 
+                transaksi t ON dt.id_transaksi = t.id 
+            JOIN 
+                pelanggan p ON t.id_pelanggan = p.id
+            ORDER BY 
+                dt.id DESC;
