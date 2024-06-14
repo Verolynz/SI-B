@@ -17,8 +17,8 @@ $kendaraan_harian = getKendaraanHarian();
 
 $transaksi_harian = getTransaksiHarian();
 
-echo $_SERVER['REMOTE_ADDR'];
-var_dump ($_SERVER['REMOTE_ADDR']);
+
+
 
 
 ?>
