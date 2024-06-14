@@ -378,5 +378,25 @@ END;
 //
 DELIMITER ;
 
+DELIMITER //
+CREATE TRIGGER after_register_log_ip
+AFTER INSERT ON users
+FOR EACH ROW
+BEGIN
+    INSERT INTO log_register_ip (user_id, ip_register)
+    VALUES (NEW.id, @user_ip);
+END;
+//
+DELIMITER ;
+
+
 
 -- Query dari PHP
+
+CREATE TABLE log_register_ip (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    log_register DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ip_register VARCHAR(45) NOT NULL,  -- Menyimpan IPv4 atau IPv6
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);

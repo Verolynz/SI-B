@@ -55,13 +55,18 @@ function register() {
         $username = validateInput($_POST['username']);
         $password = validateInput($_POST['password']); // Tidak ada enkripsi
         $role = validateInput($_POST['role']);
-
+        $userIp = $_SERVER['REMOTE_ADDR'];
+        
+        $stmt = mysqli_prepare($conn, "SET @user_ip = ?");
+        mysqli_stmt_bind_param($stmt, "s", $userIp);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        
         // Validasi role (pastikan hanya nilai yang diizinkan)
         $validRoles = ['admin', 'kasir', 'gudang'];
         if (!in_array($role, $validRoles)) {
             return false; // Atau berikan pesan kesalahan yang sesuai
         }
-
         $query = "INSERT INTO users (username, password, role) VALUES ('$username', '$password', '$role')";
         return mysqli_query($conn, $query);
     }
